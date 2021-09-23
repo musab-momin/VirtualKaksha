@@ -18,9 +18,7 @@
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Roboto';
   background-image: url(images/hero.svg);
   background-repeat: no-repeat;
   -webkit-font-smoothing: antialiased;
@@ -91,7 +89,7 @@ p {
 .error-msg
 {
   color: red;
-  font-size: 1rem;
+  font-size: .8rem;
   margin-left: .5em;
 
 }
@@ -109,8 +107,6 @@ p {
   /* color: #fff; */
   font-size: 2rem;
   font-family: 'astro', 'roboto';
-  /* text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
-    0px -4px 10px rgba(255,255,255,0.3); */
 }
 
 .sec-footer
@@ -157,13 +153,30 @@ p {
   width: 90%;
   margin: auto auto;
 }
+
+.mb2
+{
+  width: 90%;
+  margin: auto auto;
+  display: flex;
+  /* border: 2px solid black; */
+}
+.mb2 button
+{
+  background: #fff;
+  border: none;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
 .mb h3
 {
   margin: .5em 0;
   font-size: 2rem;
-  font-weight: 300;
+  font-weight: normal;
 }
-.mb input
+.mb input, .mb2 input
 {
   width: 90%;
   margin: .5em .5em;

@@ -9,6 +9,12 @@ import { baseurl } from "../urls";
 const Registrationform = ()=>
 {
      const[codeField, setCodeField] = useState(false)
+     const[display, setDisplay] = useState(false);
+     
+     
+     const displayToggle = ()=>{
+          setDisplay(!display)
+      }
      
 
      const {
@@ -78,7 +84,9 @@ const Registrationform = ()=>
     <>
        <div className='frm-sec'>
            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className='mb'><h3>REGISTER</h3></div>
+               <div className='mb'>
+                    <h3>REGISTER</h3>
+               </div>
                <div className='mb'>
                     <input type='text' 
                     placeholder='Full Name*'
@@ -105,16 +113,16 @@ const Registrationform = ()=>
                     />
                     {errors.email && (<p className='error-msg'>{errors.email.message}</p>)} 
                </div>
-               <div className='mb'>
-                    <input type='password' 
+               <div className='mb2'>
+                    <input type={`${display ? 'text' : 'password'}`} 
                     placeholder='Password*'
                     name='password' 
                     {...register('password', {required: 'Password is required', minLength:{value: 6, message:'Password must be 6'}})}
                     onKeyUp={()=>{trigger('password')}}
                     />
-                    {errors.password && (<p className='error-msg'>{errors.password.message}</p>)} 
-                    
+                    <button onClick={displayToggle}>{display ? 'Hide' : 'Show'}</button>
                </div>
+               {errors.password && (<p className='error-msg' style={{margin: '0 1.5em'}}>{errors.password.message}</p>)} 
                <div className='mb'>
                     <label htmlFor="role">Select role: </label>
                     <select name="role" id="role" {...register('role', {required: 'role is required'})} >
