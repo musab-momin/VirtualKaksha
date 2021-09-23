@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useState} from "react"
 import { useForm } from "react-hook-form"
-import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { baseurl } from "../urls";
+
 
 
 const Registrationform = ()=>
@@ -12,14 +13,14 @@ const Registrationform = ()=>
 
      const {
           register, 
-          handleSubmit, 
+          handleSubmit,
+          reset, 
           formState: {errors},
           trigger,
      } = useForm();
 
      const codetoggle = ()=>{
           setCodeField(!codeField)
-          toast.success('You are register')
      }
 
      const onSubmit = (data)=>
@@ -32,10 +33,13 @@ const Registrationform = ()=>
                          `${baseurl}/registerteacher`, data)
                     .then((response)=>{
                          console.log('This is response', response)
-                         toast.success('You are register')
+                         alert('Register Successfully')
+                         reset()
                     }, (error)=>{
                          console.log('this is error ', error.response.data)
-                         toast.error(error.response.data)
+                         //toast.error(error.response.data)
+                         alert(error.response.data)
+                         reset()
                     })
                }catch(error)
                {
@@ -49,18 +53,26 @@ const Registrationform = ()=>
                          `${baseurl}/registerstudent`, data)
                     .then((response)=>{
                          console.log('This is response', response)
-                         toast.success('You are register')
+                         alert('Register Successfully')
+                         //toast.success('You are register')
+                         reset()
                     }, (error)=>{
                          console.log('this is error ', error.response.data)
-                         toast.error(error.response.data)
+                         alert(error.response.data)
+                         //toast.error(error.response.data)
+                         reset()
+                         
                     })
                }catch(error)
                {
                     console.log(error)
                }
           }
-          return 'afljadlfj'
      }
+
+    
+    
+
 
     return (
     <>
@@ -128,7 +140,6 @@ const Registrationform = ()=>
                     <button type='submit'>Register</button>
                </div>
                
-               
            </form>
        </div>
     
@@ -136,7 +147,3 @@ const Registrationform = ()=>
 }
 
 export default Registrationform
-
-
-
-//&& formData.name.length > 0 && formData.email.length > 0 && formData.password.length > 0 && formData.classCode.length > 0
