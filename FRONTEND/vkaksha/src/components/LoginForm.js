@@ -16,9 +16,6 @@ const LoginForm = ()=>
         reset()
     }
     
-    const displayToggle = ()=>{
-        setDisplay(!display)
-    }
 
 
     return(
@@ -42,13 +39,12 @@ const LoginForm = ()=>
                     {errors.email && (<p className='error-msg'>{errors.email.message}</p>)}
                 </div>
                 <div className='mb2'>
-                    <input type={`${display ? 'text' : 'password'}`} 
+                    <input type='password'
                     placeholder='Password*'
                     name='password'
                     id='password'
                     {...register('password', {required: 'Password is required'})} 
                     />
-                    <button onClick={displayToggle}>{display ? 'Hide' : 'Show'}</button>
                </div>
                {errors.password && (<p className='error-msg' style={{margin: '0 1.5em'}}>{errors.password.message}</p>)}
                <div className='mb' style={{textAlign: 'right'}}>

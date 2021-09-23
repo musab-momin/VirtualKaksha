@@ -9,14 +9,7 @@ import { baseurl } from "../urls";
 const Registrationform = ()=>
 {
      const[codeField, setCodeField] = useState(false)
-     const[display, setDisplay] = useState(false);
      
-     
-     const displayToggle = ()=>{
-          setDisplay(!display)
-      }
-     
-
      const {
           register, 
           handleSubmit,
@@ -114,13 +107,12 @@ const Registrationform = ()=>
                     {errors.email && (<p className='error-msg'>{errors.email.message}</p>)} 
                </div>
                <div className='mb2'>
-                    <input type={`${display ? 'text' : 'password'}`} 
+                    <input type='password' 
                     placeholder='Password*'
                     name='password' 
                     {...register('password', {required: 'Password is required', minLength:{value: 6, message:'Password must be 6'}})}
                     onKeyUp={()=>{trigger('password')}}
                     />
-                    <button onClick={displayToggle}>{display ? 'Hide' : 'Show'}</button>
                </div>
                {errors.password && (<p className='error-msg' style={{margin: '0 1.5em'}}>{errors.password.message}</p>)} 
                <div className='mb'>
