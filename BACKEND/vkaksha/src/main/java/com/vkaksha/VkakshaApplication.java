@@ -11,4 +11,5 @@ public class VkakshaApplication {
 		SpringApplication.run(VkakshaApplication.class, args);
 	}
 
+
 }

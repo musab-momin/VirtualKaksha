@@ -148,6 +148,19 @@ p {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 5px;
 }
+
+.frm
+{
+  width: 50%;
+  height: 300px;
+  background: #121212;
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 5px;
+}
+
+
 .mb
 {
   width: 90%;
@@ -212,6 +225,7 @@ p {
   .container
   {
     width: 90%;
+    
   }
   .sec-footer{width: 90%;}
   .logo
@@ -229,6 +243,11 @@ p {
   }
   .frm-sec form 
   {
-    width: 90%;
+    width: 100%;
+  }
+  .frm
+  {
+    width: 50%;
+    height: 400px;
   }
 }

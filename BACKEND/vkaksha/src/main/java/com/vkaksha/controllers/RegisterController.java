@@ -6,18 +6,21 @@ import com.vkaksha.models.AppUser;
 import com.vkaksha.models.Student;
 import com.vkaksha.models.Teacher;
 import com.vkaksha.services.RegisterService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@AllArgsConstructor
+@CrossOrigin(origins = "*")
 public class RegisterController
 {
-    @Autowired
     private RegisterService registerService;
 
     public void registerAppUser(Teacher element)
@@ -41,10 +44,10 @@ public class RegisterController
     }
 
 
-    @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping("/registerteacher")
     public ResponseEntity<?> registerTeacher(@RequestBody Teacher teacher)
     {
+        System.out.println(teacher);
         try{
             Teacher savedTeacher = this.registerService.saveTeacher(teacher);
             try{
@@ -76,4 +79,10 @@ public class RegisterController
     }
 
 
+
+
+
+
 }
+
+
