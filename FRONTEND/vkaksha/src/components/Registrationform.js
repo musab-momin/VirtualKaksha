@@ -19,8 +19,9 @@ const Registrationform = ()=>
      } = useForm();
 
      const codetoggle = ()=>{
-          setCodeField(!codeField)
+          setCodeField(!codeField)    
      }
+
 
      const onSubmit = (data)=>
      {
@@ -31,13 +32,13 @@ const Registrationform = ()=>
                     axios.post(
                          `${baseurl}/registerteacher`, data)
                     .then((response)=>{
-                         console.log('This is response', response)
-                         alert('Register Successfully')
+                         console.log(response)
+                         let mssg = response.data.name + ' you are registered Successfully';
+                         alert(mssg)
                          reset()
                     }, (error)=>{
-                         console.log('this is error ', error.response.data)
-                         //toast.error(error.response.data)
-                         alert(error.response.data)
+                         let mssg = error.response.data + 'try different email';    
+                         alert(mssg)
                          reset()
                     })
                }catch(error)
@@ -52,24 +53,23 @@ const Registrationform = ()=>
                          `${baseurl}/registerstudent`, data)
                     .then((response)=>{
                          console.log('This is response', response)
-                         alert('Register Successfully')
-                         //toast.success('You are register')
+                         let mssg = response.data.name + ' you are registered Successfully';
+                         alert(mssg)
                          reset()
                     }, (error)=>{
-                         console.log('this is error ', error.response.data)
-                         alert(error.response.data)
-                         //toast.error(error.response.data)
+                         let mssg = error.response.data;
+                         alert(mssg)
+                         console.log(error.response.data)
                          reset()
                          
                     })
                }catch(error)
                {
-                    console.log(error)
+                    console.log('catch block: ' + error)
                }
           }
      }
 
-    
     
 
 
@@ -106,25 +106,22 @@ const Registrationform = ()=>
                     />
                     {errors.email && (<p className='error-msg'>{errors.email.message}</p>)} 
                </div>
-               <div className='mb2'>
+               <div className='mb'>
                     <input type='password' 
                     placeholder='Password*'
                     name='password' 
                     {...register('password', {required: 'Password is required', minLength:{value: 6, message:'Password must be 6'}})}
                     onKeyUp={()=>{trigger('password')}}
                     />
+                    {errors.password && (<p className='error-msg'>{errors.password.message}</p>)} 
                </div>
-               {errors.password && (<p className='error-msg' style={{margin: '0 1.5em'}}>{errors.password.message}</p>)} 
                <div className='mb'>
-                    <label htmlFor="role">Select role: </label>
-                    <select name="role" id="role" {...register('role', {required: 'role is required'})} >
-                    <option 
-                    value="TEACHER"
-                    onClick={()=>{setCodeField(false)}} >TEACHER</option>
-                    <option 
-                    value="STUDENT"
-                    onClick={codetoggle}>STUDENT</option>
-                </select>
+                    <label htmlFor="role" style={{margin: '0 1em'}}>Select role: </label>
+                    <select name="role" id="role" {...register('role', {required: 'role is required'})} 
+                    onChange={codetoggle}>
+                         <option value="TEACHER" >TEACHER</option>
+                         <option value="STUDENT" >STUDENT</option>
+                    </select>
                </div>
                <div style={{display: `${codeField ? '':'none'}`}} className='mb'>
                     <input 
@@ -141,6 +138,7 @@ const Registrationform = ()=>
                </div>
                
            </form>
+           {/* <button onClick={tester}>click me</button> */}
        </div>
     
     </>)

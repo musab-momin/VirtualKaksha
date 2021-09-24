@@ -10,6 +10,7 @@ import com.vkaksha.repo.AppUserRepo;
 import com.vkaksha.repo.StudentRepo;
 import com.vkaksha.repo.TeacherRepo;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
@@ -20,13 +21,18 @@ public class RegisterService
     private TeacherRepo teacherRepo;
     private StudentRepo studentRepo;
     private AppUserRepo appUserRepo;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     public Teacher saveTeacher(Teacher teacher)
     {
         Teacher regTeacher=null;
-        if (teacherRepo.existsTeacherByEmail(teacher.getEmail()))
+        if (teacherRepo.existsTeacherByEmail(teacher.getEmail())) {
+            System.out.println("Email exists");
             throw new EmailNotAvailable("Email already taken...");
+        }
         try{
+            teacher.setPassword(bCryptPasswordEncoder.encode(teacher.getPassword()));
             regTeacher = this.teacherRepo.save(teacher);
         }catch (Exception ae){
             throw new SomethingWentWrong("Something went wrong...");
@@ -39,6 +45,7 @@ public class RegisterService
         if (studentRepo.existsStudentByEmail(student.getEmail()))
             throw new EmailNotAvailable("Email already taken...");
         try{
+            student.setPassword(bCryptPasswordEncoder.encode(student.getPassword()));
             regStudent = this.studentRepo.save(student);
         }catch (Exception ae){
             throw new SomethingWentWrong("Something went wrong...");
